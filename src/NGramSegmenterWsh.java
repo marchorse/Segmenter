@@ -58,11 +58,11 @@ public class NGramSegmenterWsh {
 					}
 				}
 		println("=====");
-		double maxv = v[0][1][n]*g.cal3(s.substring(0,1), s.substring(1,n), "</s>");
+		double maxv = v[0][1][n]+g.cal3(s.substring(0,1), s.substring(1,n), "</s>");
 		int ri=0,rj=1;
 		for (j=1;j<=n-1;j++)
 			for (i=0;i<j;i++) {
-				if (maxv<v[i][j][n]*g.cal3(s.substring(i,j),s.substring(j,n),"</s>")) {
+				if (maxv<v[i][j][n]+g.cal3(s.substring(i,j),s.substring(j,n),"</s>")) {
 					print("old:");
 					print(maxv);
 					print(" ");
@@ -70,7 +70,7 @@ public class NGramSegmenterWsh {
 					print(" </s>");
 					print("->");
 					println(v[ri][rj][n]);
-					maxv = v[i][j][n]*g.cal3(s.substring(i,j),s.substring(j,n),"</s>");
+					maxv = v[i][j][n]+g.cal3(s.substring(i,j),s.substring(j,n),"</s>");
 					ri=i;
 					rj=j;
 					print("new:");
