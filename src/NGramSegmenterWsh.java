@@ -64,18 +64,22 @@ public class NGramSegmenterWsh {
 			for (i=0;i<j;i++) {
 				if (maxv<v[i][j][n]*g.cal3(s.substring(i,j),s.substring(j,n),"</s>")) {
 					print("old:");
+					print(maxv);
+					print(" ");
 					print(p[ri][rj][n]);
-					print("</s>");
+					print(" </s>");
 					print("->");
 					println(v[ri][rj][n]);
 					maxv = v[i][j][n]*g.cal3(s.substring(i,j),s.substring(j,n),"</s>");
 					ri=i;
 					rj=j;
-					print("new");
-					print(p[i][j][n]);
-					print("</s>");
+					print("new:");
+					print(maxv);
+					print(" ");
+					print(p[ri][rj][n]);
+					print(" </s>");
 					print("->");
-					println(v[i][j][n]);
+					println(v[ri][rj][n]);
 				}
 			}
 		System.out.println(p[ri][rj][n]);
