@@ -57,19 +57,29 @@ public class NGramSegmenterWsh {
 						}
 					}
 				}
-		
-		double maxv = v[0][1][n-1]*g.cal3(s.substring(0,1), s.substring(1,n-1), "</s>");
+		println("=====");
+		double maxv = v[0][1][n]*g.cal3(s.substring(0,1), s.substring(1,n), "</s>");
 		int ri=0,rj=1;
 		for (j=1;j<=n-1;j++)
 			for (i=0;i<j;i++) {
-				if (maxv<v[i][j][n-1]*g.cal3(s.substring(i,j),s.substring(j,n-1),"</s>")) {
-					maxv = v[i][j][n-1]*g.cal3(s.substring(i,j),s.substring(j,n-1),"</s>");
+				if (maxv<v[i][j][n]*g.cal3(s.substring(i,j),s.substring(j,n),"</s>")) {
+					print("old:");
+					print(p[ri][rj][n]);
+					print("</s>");
+					print("->");
+					println(v[ri][rj][n]);
+					maxv = v[i][j][n]*g.cal3(s.substring(i,j),s.substring(j,n),"</s>");
 					ri=i;
 					rj=j;
+					print("new");
+					print(p[i][j][n]);
+					print("</s>");
+					print("->");
+					println(v[i][j][n]);
 				}
 			}
-		System.out.println(p[ri][rj][n-1]);
-		return p[ri][rj][n-1].split(" ");
+		System.out.println(p[ri][rj][n]);
+		return p[ri][rj][n].split(" ");
 	}
 	
 	//tmp
@@ -86,7 +96,7 @@ public class NGramSegmenterWsh {
 		
 		//println("abc".substring(0,2));
 		//println("abc".substring(0,"abc".length()));
-		println(-Double.MAX_VALUE+100);
+		//println(-Double.MAX_VALUE+100);
 		System.out.println(g.dict1.size());
 		System.out.println(g.dict2.size());
 		System.out.println(g.dict3.size());

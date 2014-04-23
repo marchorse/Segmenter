@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 
 public class NGramWsh {
-		public static final double punish = -10000000;
+		public static final double punish = -100;//这里的惩罚值不能等同与分词里的串概率，应该从语料中来。
 		public HashMap<String,Double> dict1 = new HashMap<String, Double>();
 		public HashMap<String,Double> back1 = new HashMap<String, Double>();
 		public HashMap<String,Double> dict2 = new HashMap<String, Double>();
@@ -15,7 +15,7 @@ public class NGramWsh {
 		public HashMap<String,Double> dict3 = new HashMap<String, Double>();
 		public HashMap<String,Double> back3 = new HashMap<String, Double>();
 		public NGramWsh(String modelFilePath) throws IOException {
-			File filename = new File(modelFilePath);  
+			File filename = new File(modelFilePath);
 	        InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));   
 	        BufferedReader br = new BufferedReader(reader);   
 	        String line = "";
@@ -84,11 +84,9 @@ public class NGramWsh {
 				return back2.get(s1+" "+s2)+cal2(s2,s3);
 			else
 				return punish;
-				//return cal2(s2,s3);
 			}
 		else {
 			return punish;
-			//return cal2(s2,s3);
 		}
 	}
 	
