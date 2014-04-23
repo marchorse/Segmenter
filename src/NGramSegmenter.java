@@ -19,8 +19,8 @@ public class NGramSegmenter {
 		int [][][][] p = new int [n][n][n][n];
 		
 		for (i=0;i<n;i++)
-			for (j=0;j<n;j++)
-				for (k=0;k<n;k++) {
+			for (j=i+1;j<n;j++)
+				for (k=j+1;k<n;k++) {
 					print(s.substring(0,k));
 					print("\n");
 					print(s.substring(0,1));
@@ -36,8 +36,8 @@ public class NGramSegmenter {
 				}
 		
 		for (i=0;i<n;i++)
-			for (j=0;j<n;j++)
-				for (k=0;k<n;k++) 
+			for (j=i+1;j<n;j++)
+				for (k=j+1;k<n;k++) 
 					for (t=0;t<n;t++) {
 						v[t][i][j][k]=-Double.MAX_VALUE;
 						p[t][i][j][k]=-1;

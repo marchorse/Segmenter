@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 
 public class NGramWsh {
+		public static final double punish = -10000000;
 		public HashMap<String,Double> dict1 = new HashMap<String, Double>();
 		public HashMap<String,Double> back1 = new HashMap<String, Double>();
 		public HashMap<String,Double> dict2 = new HashMap<String, Double>();
@@ -73,7 +74,7 @@ public class NGramWsh {
 	
 	public Double cal3(String s1,String s2,String s3) {
 		if (s1.length()==0||s2.length()==0||s3.length()==0)
-			return -Double.MAX_VALUE;
+			return punish;
 		
 		if (dict3.containsKey(s1+" "+s2+" "+s3)) {
 			return dict3.get(s1+" "+s2+" "+s3);
@@ -82,18 +83,18 @@ public class NGramWsh {
 			if (back2.containsKey(s1+" "+s2))
 				return back2.get(s1+" "+s2)+cal2(s2,s3);
 			else
-				return -Double.MAX_VALUE;
+				return punish;
 				//return cal2(s2,s3);
 			}
 		else {
-			return -Double.MAX_VALUE;
+			return punish;
 			//return cal2(s2,s3);
 		}
 	}
 	
 	public Double cal2(String s1,String s2) {
 		if (s1.length()==0||s2.length()==0)
-			return -Double.MAX_VALUE;
+			return punish;
 		
 		if (dict2.containsKey(s1+" "+s2)) {
 			return dict2.get(s1+" "+s2);
@@ -103,22 +104,22 @@ public class NGramWsh {
 				if (back1.containsKey(s1))
 					return back1.get(s1)+cal1(s2);
 				else
-					return -Double.MAX_VALUE;
+					return punish;
 			}
 			else {
-				return -Double.MAX_VALUE;
+				return punish;
 			}
 		}
 	}
 	
 	public Double cal1(String s1) {
 		if (s1.length()==0)
-			return -Double.MAX_VALUE;
+			return punish;
 		
 		if (dict1.containsKey(s1))
 			return dict1.get(s1);
 		else {
-			return -Double.MAX_VALUE;
+			return punish;
 		}	
 	}
 }
