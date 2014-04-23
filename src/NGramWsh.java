@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 
 public class NGramWsh {
-		public static final double punish = -100;//这里的惩罚值不能等同与分词里的串概率，应该从语料中来。
+		public static final double punish = -100;
 		public HashMap<String,Double> dict1 = new HashMap<String, Double>();
 		public HashMap<String,Double> back1 = new HashMap<String, Double>();
 		public HashMap<String,Double> dict2 = new HashMap<String, Double>();
@@ -70,8 +70,7 @@ public class NGramWsh {
                 line = br.readLine();  
             }
 		}
-	
-	//当下语言模型的条件概率计算错误
+		
 	public Double cal3(String s1,String s2,String s3) {
 		if (s1.length()==0||s2.length()==0||s3.length()==0)
 			return punish;
@@ -79,15 +78,11 @@ public class NGramWsh {
 		if (dict3.containsKey(s1+" "+s2+" "+s3)) {
 			return dict3.get(s1+" "+s2+" "+s3);
 		}
-		else if (dict2.containsKey(s1+" "+s2)) {
+		else
 			if (back2.containsKey(s1+" "+s2))
 				return back2.get(s1+" "+s2)+cal2(s2,s3);
 			else
-				return punish;
-			}
-		else {
-			return punish;
-		}
+				return cal2(s2,s3);
 	}
 	
 	public Double cal2(String s1,String s2) {
@@ -98,15 +93,10 @@ public class NGramWsh {
 			return dict2.get(s1+" "+s2);
 		}
 		else {
-			if (dict1.containsKey(s1)) {
-				if (back1.containsKey(s1))
-					return back1.get(s1)+cal1(s2);
-				else
-					return punish;
-			}
-			else {
-				return punish;
-			}
+			if (back1.containsKey(s1))
+				return back1.get(s1)+cal1(s2);
+			else
+				return cal1(s2);
 		}
 	}
 	
