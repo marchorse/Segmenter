@@ -1,4 +1,6 @@
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 
 public class NGramSegmenterWsh {
@@ -62,6 +64,14 @@ public class NGramSegmenterWsh {
 		int ri=0,rj=1;
 		for (j=1;j<=n-1;j++)
 			for (i=0;i<j;i++) {
+				print(p[ri][rj][n]);
+				print("->");
+				print(maxv);
+				print(" ");
+				print(p[i][j][n]);
+				print(v[i][j][n]);
+				print(" ");
+				println(g.cal3(s.substring(i,j),s.substring(j,n),"</s>"));
 				if (maxv<v[i][j][n]+g.cal3(s.substring(i,j),s.substring(j,n),"</s>")) {
 					print("old:");
 					print(maxv);
@@ -97,7 +107,8 @@ public class NGramSegmenterWsh {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		readNGram();
-		
+		PrintStream ps = new PrintStream(new FileOutputStream("testout"));
+		System.setOut(ps);
 		//println("abc".substring(0,2));
 		//println("abc".substring(0,"abc".length()));
 		//println(-Double.MAX_VALUE+100);
@@ -105,7 +116,8 @@ public class NGramSegmenterWsh {
 		System.out.println(g.dict2.size());
 		System.out.println(g.dict3.size());
 		println(g.cal3("展现", "滨海", "魅力"));
-		String [] result = segment("展现滨海魅力");
+		//String [] result = segment("展现魅力滨海");
+		String [] result = segment("高女士说自己五十六岁是名退休医生她想不通自己的年龄应该和男子母亲的岁数差不多了男子怎么能说动手就动手呢");
 		for (int i=0;i<result.length;i++) {
 			print(result[i]);
 			print(" ");

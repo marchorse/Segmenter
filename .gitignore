@@ -2,3 +2,4 @@
 bin/
 #ignore *.class
 *.class
+*.swp
